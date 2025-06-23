@@ -411,6 +411,84 @@ export class RGB{
 }
 
 
+
+export class Rectangle{
+    constructor(position, dimension, color){
+        if(!(position instanceof Vector2D)) throw new Error("position must be a Vector2D")
+
+        if(!(dimension instanceof Dimension2D)) throw new Error("dimensionb must be a Dimension2D")
+        
+        this.#position = position
+        this.#dimension = dimension
+        this.#color = color
+    }
+
+    #position
+    #dimension
+    #color
+
+    getPosition(){
+        return this.#position
+    }
+
+    getDimensions(){
+        return this.#dimension
+    }
+
+    getRGB(){
+        return this.#color
+    }
+
+
+
+    setPosition(position){
+        if(!(position instanceof Vector2D)) throw new Error("position must be a Vector2D")
+
+        this.#position = position
+    }
+
+    setDimensions(dimension){
+        if(!(dimension instanceof Dimension2D)) throw new Error("dimensionb must be a Dimension2D")
+
+        this.#dimension = dimension
+    }
+
+    setRGB(color){
+        this.#color = color
+    }
+
+    increaseX(value){
+        this.#position.setX(this.#position.getX() + value)
+    }
+
+    increaseY(value){
+        this.#position.setX(this.#position.getX() + value)
+    }
+
+    increaseY(value){
+        this.#dimension.setWidth(this.#dimension.getWidth() + value)
+    }
+
+    increaseHeight(value){
+        this.#dimension.setHeight(this.#dimension.getHeight() + value)
+    }
+
+
+
+    
+
+
+    localIntersects(rect){
+        if(!(rect instanceof Rectangle)) throw new Error("Rect must be a rectanlge")
+        
+        
+    }
+
+    static intersects(rect1, rect2){
+
+    }
+}
+
 /**browser utils go down here, they are incompativle with backend things like nodejs */
 
 /**
@@ -431,13 +509,23 @@ export class HTMLCanvasManager{
 
         if(window){
             this.#window.addEventListener("resize", (ev) => {
-                console.log(ev)
+            
             })
         }
+
+        const { width, height } = canvas.getBoundingClientRect();
+
+        this.#canvas.width = width
+        this.#canvas.height = height
     }
 
     #canvas 
     #window
+
+
+
+    //front buffer at buffer 0, back_buffer at buffer 0.
+
 
     /**
      * returns the html canvas

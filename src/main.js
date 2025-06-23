@@ -4,49 +4,28 @@ import * as Utils from "./Utils.js"
 await myUtils.displayProjName(document.getElementById("page_heading"))
 
 const canvas = document.getElementById("page_canvas")
-const canvas_manager = new myUtils.HTMLCanvasManager(canvas)
+const canvas_manager = new myUtils.HTMLCanvasManager(canvas, window)
 
 const ctx = canvas_manager.getContext()
 const content_container = document.getElementById("content_container")
 
 const { width, height } = canvas.getBoundingClientRect();
-const ratio = (width / height)
-console.log("canvas width : " + width + ", canvas height: " + height);
+
+
 
 canvas.width = width
 canvas.height = height
 
-// canvas.clientHeight = canvas.height
+const position = new myUtils.Vector2D(0.25, 0.25)
 
+const dimensions = new myUtils.Dimension2D(0.5,0.5)
 
+canvas_manager.drawRect(position, dimensions)
 
-
-const Network = new Utils.INodeList(255, 3, true)
 
 ;(async () => {
 
-    for(let i = 0; i < 100000; i++){
-        canvas_manager.clearCanvas()
-        let my_color = myUtils.RGB.parseRGB(Network.getNodeValueArr().reverse())
     
-
-        Network.incrementList()
-
-        ctx.fillStyle = my_color.formatToString()
-
-        // console.log(my_color.formatToString())
-    
-        let position = new myUtils.Vector2D(0.25,0.25)
-        let dimension = new myUtils.Dimension2D(0.5,0.5)
-    
-        canvas_manager.drawRect(position, dimension)
-        console.log("Closing")
-        await new Promise((res) => {
-            setTimeout(() => res(), 1000)
-            
-        })
-        console.log("OPEN")
-    }
 })()
 
 
